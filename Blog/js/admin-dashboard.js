@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://localhost:3000';  // Set the backend URL
+const BACKEND_URL = 'https://debuilder.vercel.app/';  // Set the backend URL
 
 // Handle Blog Upload Form Submission
 document.getElementById('uploadBlogForm').addEventListener('submit', async (e) => {

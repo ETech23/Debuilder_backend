@@ -1,5 +1,5 @@
 // Backend URL Constant
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = 'https://debuilder.vercel.app/';
 
 // Authentication Logic for Login and Register
 

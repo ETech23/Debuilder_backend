@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = 'https://debuilder.vercel.app/';
 
 // Reset Password Logic
 document.getElementById('resetPasswordForm').addEventListener('submit', async (e) => {

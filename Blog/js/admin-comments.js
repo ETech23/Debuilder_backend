@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = 'https://debuilder.vercel.app/';
 let currentCommentPage = 1;
 const commentsPerPage = 10;
 let commentSearchQuery = '';

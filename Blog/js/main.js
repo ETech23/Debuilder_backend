@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://localhost:3000';  // Set the backend URL
+const BACKEND_URL = 'https://debuilder.vercel.app';  // Set the backend URL
 let currentPage = 1;  // Default to the first page
 let searchQuery = '';  // Track the search query
 const blogsPerPage = 6;  // Number of blogs per page
