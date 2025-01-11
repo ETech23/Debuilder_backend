@@ -1,4 +1,4 @@
-const BACKEND_URL = 'https://debuilder.vercel.app/';
+const BACKEND_URL = 'https://debuilder.fly.dev';
 
 // Reset Password Logic
 document.getElementById('resetPasswordForm').addEventListener('submit', async (e) => {

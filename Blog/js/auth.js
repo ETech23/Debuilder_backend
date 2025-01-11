@@ -1,15 +1,11 @@
-// Backend URL Constant
-const BACKEND_URL = 'https://debuilder.vercel.app/';
+//const BACKEND_URL = 'https://debuilder.fly.dev';
 
-// Authentication Logic for Login and Register
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
 
-    /** ==========================
-     * 📌 User Login
-     * ========================== */
+    /** 📌 User Login */
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -18,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = document.getElementById('password').value;
 
             try {
-                const response = await fetch(`${BACKEND_URL}/api/auth/login`, {
+                const response = await fetch(`https://debuilder.fly.dev/api/auth/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
@@ -27,14 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
                 if (response.ok) {
                     localStorage.setItem('token', result.token);
-                    localStorage.setItem('role', result.role); // Store user role
+                    localStorage.setItem('role', result.role);
 
                     alert('Login successful!');
-                    if (result.role === 'admin') {
-                        window.location.href = 'admin-dashboard.html';
-                    } else {
-                        window.location.href = 'index.html';
-                    }
+                    window.location.href = result.role === 'admin' ? 'admin-dashboard.html' : 'index.html';
                 } else {
                     alert(result.message || 'Login failed');
                 }
@@ -45,9 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /** ==========================
-     * 📌 User Registration
-     * ========================== */
+    /** 📌 User Registration */
     if (registerForm) {
         registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -63,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const response = await fetch(`${BACKEND_URL}/api/auth/register`, {
+                const response = await fetch(`https://debuilder.fly.dev/api/auth/register`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, email, password })
@@ -83,12 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /** ==========================
-     * 📌 Auto Logout on Token Expiry
-     * ========================== */
+    /** 📌 Auto Logout on Token Expiry */
     function isTokenExpired() {
         const token = localStorage.getItem('token');
-        if (!token) return true;
+        if (!token) return false;
 
         try {
             const payload = JSON.parse(atob(token.split('.')[1]));
@@ -106,23 +94,17 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'login.html';
     }
 
-    // Check Token Expiry on Page Load
-    if (isTokenExpired()) {
+    if (localStorage.getItem('token') && isTokenExpired()) {
         autoLogout();
     }
 
-    /** ==========================
-     * 📌 Periodic Token Validation
-     * ========================== */
+    /** 📌 Periodic Token Validation */
     async function validateToken() {
         const token = localStorage.getItem('token');
-        if (!token) {
-            autoLogout();
-            return;
-        }
+        if (!token) return;
 
         try {
-            const response = await fetch(`${BACKEND_URL}/api/auth/validate-token`, {
+            const response = await fetch(`https://debuilder.fly.dev/api/auth/validate-token`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 
@@ -135,13 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Periodically Check Token Validity Every 5 Minutes
-    setInterval(validateToken, 5 * 60 * 1000);
+    setInterval(validateToken, 5 * 60 * 1000); // Every 5 minutes
 });
 
-/** ==========================
- * 📌 Logout Functionality
- * ========================== */
+/** 📌 Logout */
 function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');

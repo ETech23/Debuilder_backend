@@ -1,4 +1,4 @@
-const BACKEND_URL = 'https://debuilder.vercel.app/';
+const BACKEND_URL = 'https://debuilder.fly.dev';
 let currentCommentPage = 1;
 const commentsPerPage = 10;
 let commentSearchQuery = '';
